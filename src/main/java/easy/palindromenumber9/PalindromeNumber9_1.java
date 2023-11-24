@@ -23,7 +23,7 @@ public class PalindromeNumber9_1 {
         }
 
         String values = String.valueOf(x);
-        for (int i = 0; i < values.length(); i++) {
+        for (int i = 0; i < (values.length() / 2) + 1; i++) {
             int lastIndex = values.length() - 1 - i;
             boolean isEqual = values.charAt(i) == values.charAt(lastIndex);
             if (!isEqual) {
