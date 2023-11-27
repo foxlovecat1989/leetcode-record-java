@@ -18,10 +18,10 @@ public class LongestCommonPrefix14 {
     public static String longestCommonPrefix(String[] strs) {
         int count = 0;
         boolean isDiffer = false;
-        for (int index = 0; index < strs[0].length(); index++) {
-            for (int j = 1; j < strs.length; j++) {
-                boolean isIndexOutOfBound = index >= strs[j].length();
-                if (isIndexOutOfBound || strs[0].charAt(index) != strs[j].charAt(index)) {
+        for (int indexOfPointer = 0; indexOfPointer < strs[0].length(); indexOfPointer++) {
+            for (int indexOfElement = 1; indexOfElement < strs.length; indexOfElement++) {
+                boolean isIndexOutOfBound = indexOfPointer >= strs[indexOfElement].length();
+                if (isIndexOutOfBound || strs[0].charAt(indexOfPointer) != strs[indexOfElement].charAt(indexOfPointer)) {
                     isDiffer = true;
                     break;
                 }
