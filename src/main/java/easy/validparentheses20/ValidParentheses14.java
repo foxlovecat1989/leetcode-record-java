@@ -21,37 +21,32 @@ public class ValidParentheses14 {
     }
 
     public static boolean isValid(String s) {
-        Map<Character, Character> leftPart = new HashMap<>();
-        leftPart.put('[', ']');
-        leftPart.put('(', ')');
-        leftPart.put('{', '}');
+        Map<Character, Character> leftSideMap = getLeftSideMap();
 
-        Map<Character, Character> rightPart = new HashMap<>();
-        rightPart.put(']', '[');
-        rightPart.put(')', '(');
-        rightPart.put('}', '{');
-
-        // first element is right part
-        if (rightPart.get(s.charAt(0)) != null) {
-            return false;
-        }
-
-        List<Character> store = new ArrayList<>();
+        List<Character> stack = new ArrayList<>();
         for (int i = 0; i < s.length(); i++) {
             char currentChar = s.charAt(i);
-
-            boolean isLeftPart = leftPart.get(currentChar) != null;
-            if (isLeftPart) {
-                store.add(currentChar);
+            boolean isLeftSide = leftSideMap.get(currentChar) != null;
+            if (isLeftSide) {
+                stack.add(currentChar);
             } else {
-                if (store.isEmpty() || store.get(store.size() - 1) != rightPart.get(currentChar)) {
+                if (stack.isEmpty() || leftSideMap.get(stack.get(stack.size() - 1)) != currentChar) {
                     return false;
                 }
 
-                store.remove(store.size() - 1);
+                stack.remove(stack.size() - 1);
             }
         }
 
-        return store.isEmpty();
+        return stack.isEmpty();
+    }
+
+    private static Map<Character, Character> getLeftSideMap() {
+        Map<Character, Character> map = new HashMap<>();
+        map.put('[', ']');
+        map.put('(', ')');
+        map.put('{', '}');
+
+        return map;
     }
 }
